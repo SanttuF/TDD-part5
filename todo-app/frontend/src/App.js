@@ -6,19 +6,6 @@ const App = () => {
 
   return (
     <div>
-      <form onSubmit={async (event) => {
-        event.preventDefault()
-        const data = await sendHello(event.target.textField.value)
-        setText(data)
-      }}
-      >
-        <input
-          id='textField'
-          type='text'
-          name='textField'
-        />
-        <button id='submitButton' type='submit'>submit</button>
-      </form>
       {text}
     </div>
   );
