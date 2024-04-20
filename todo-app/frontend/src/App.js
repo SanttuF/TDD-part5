@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { sendHello } from './todoService.js'
-const App = () => {
+import InputForm from './InputForm.js';
 
-  const [text, setText] = useState('')
+const App = () => {
 
   return (
     <div>
-      {text}
+      <InputForm sendTodo={sendHello} />
     </div>
   );
 }
