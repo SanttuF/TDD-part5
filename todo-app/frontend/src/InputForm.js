@@ -1,20 +1,28 @@
+import { useState } from "react"
 
 
-const InputForm = ({ sendTodo }) => {
+const InputForm = ({ sendTodo, todos, setTodos }) => {
 
-    return (<form onSubmit={(event) => {
-        event.preventDefault()
-        sendTodo(event.target.textField.value)
-    }}
-      >
-        <input
-          id='textField'
-          type='text'
-          name='textField'
-          data-testid='inputField'
-        />
-        <button id='submitButton' type='submit' data-testid='submitButton'>submit</button>
-      </form>)  
+  const [text, setText] = useState('')
+
+  const addTodo = (event) => {
+    event.preventDefault()
+    sendTodo({text})
+    setTodos(todos.concat([text]))
+    setText('')
+  }
+
+  return (
+    <form onSubmit={addTodo}>
+      <input
+        id='textField'
+        type='text'
+        name='textField'
+        data-testid='inputField'
+        onChange={e => {setText(e.target.value)}}
+      />
+      <button id='submitButton' type='submit' data-testid='submitButton'>submit</button>
+    </form>)  
 }
 
 export default InputForm
