@@ -1,15 +1,19 @@
-import { useState } from 'react'
-import { sendHello } from './todoService.js'
+import { useEffect, useState } from 'react'
+import { sendTodo, getTodos } from './todoService.js'
 import InputForm from './InputForm.js';
 import TodoList from './TodoList.js';
 
 const App = () => {
 
-const [todos, setTodos] = React.useState([])
+  const [todos, setTodos] = useState([])
+
+  useEffect(() => {
+    getTodos().then(todos => setTodos(todos))
+  }, [])
 
   return (
     <div>
-      <InputForm sendTodo={sendHello} />
+      <InputForm sendTodo={sendTodo} todos={todos} setTodos={setTodos} />
       <TodoList todos={todos} />
     </div>
   );
