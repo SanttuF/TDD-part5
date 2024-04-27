@@ -28,3 +28,18 @@ test('getting all todos', async () => {
     expect(todos).toContainEqual({'id': 2, todo})
     expect(todos).toContainEqual({'id': 1, 'todo': todo2})
 })
+
+test('post saves given todo', async() => {
+  await dbController.initiateDB()
+  const testTodo = 'testTodo'
+  api
+    .post('/')
+    .send({'todo': testTodo})
+    .expect(201)
+  
+  const todos = await new Promise((resolve, reject) => {
+    db.get('SELECT * FROM todos', (e, r) => {if(e) reject(e); resolve(r)})
+  })
+  console.log(todos)
+  expect(todos[0].todo).toBe(testTodo)
+})

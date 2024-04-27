@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-export const sendTodo = async msg => {
-    const res = await axios.post('http://localhost:8000/api/', {msg})
+export const sendTodo = async todo => {
+    const res = await axios.post('http://localhost:8000/api/', {todo})
     return res.data.text
 }
 

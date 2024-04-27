@@ -13,7 +13,7 @@ const test = async () => {
 test()
 
 app.post('/', (req, res) => {
-    db.testsave(req.body.msg).then(() => db.testretrieve()).then(r => res.json(r))
+    db.testsave(req.body.todo).then(() => db.testretrieve()).then(r => res.json(r))
 })
 
 app.get('/', async (req, res) => {
