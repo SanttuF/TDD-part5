@@ -5,9 +5,22 @@ if (fs.existsSync('./database/db.sqlite')) {
     fs.unlinkSync('./database/db.sqlite')
 }
 let db =  new sqlite3.Database('./database/db.sqlite')
+db.serialize()
 
 const initiateDB = () => {
-    db.run('CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY AUTOINCREMENT,text TEXT);') 
+    return new Promise ((resolve, reject) => {
+        db.run('CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY AUTOINCREMENT,text TEXT);', ) 
+        db.run('CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY AUTOINCREMENT,todo TEXT);', () => {resolve()}) 
+    })
+}
+
+const getAll = () => {
+    return new Promise((resolve, reject) => {
+        db.all('SELECT * FROM todos', (error, result) => {
+            if(error) reject(error)
+            resolve(result)
+        })
+    })
 }
 
 const testsave = (todo) => {
@@ -26,4 +39,4 @@ const testretrieve = () => {
     })
 }
 
-module.exports = {initiateDB, testsave, testretrieve}
+module.exports = {initiateDB, testsave, testretrieve, getAll}
