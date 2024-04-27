@@ -20,6 +20,7 @@ const InputForm = ({ sendTodo, todos, setTodos }) => {
         name='textField'
         data-testid='inputField'
         onChange={e => {setText(e.target.value)}}
+        value={text}
       />
       <button id='submitButton' type='submit' data-testid='submitButton'>submit</button>
     </form>)  

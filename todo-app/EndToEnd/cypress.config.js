@@ -7,7 +7,4 @@ module.exports = defineConfig({
     },
     baseUrl: 'http://localhost:8000'
   },
-  env: {
-    BACKEND: 'http://localhost:8080/api/'
-  }
 });

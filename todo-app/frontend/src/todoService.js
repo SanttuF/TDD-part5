@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-// const url = 'http://localhost:8000/api/'
-const url = 'http://localhost:8080'
+const url = 'http://localhost:8000/api/'
+// const url = 'http://localhost:8080'
 
 export const sendTodo = async todo => {
     const res = await axios.post(url, todo)

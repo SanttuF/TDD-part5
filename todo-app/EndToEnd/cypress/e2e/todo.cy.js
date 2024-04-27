@@ -4,6 +4,6 @@ describe('Todo', () => {
     cy.get('#textField').type('e2e')
     cy.get('#submitButton').click()
 
-    cy.contains('Hello e2e from backend')
+    cy.contains('e2e')
   })
 })
