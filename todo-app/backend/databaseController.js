@@ -1,9 +1,5 @@
 const sqlite3 = require('sqlite3').verbose();
-const fs = require('fs');
 
-if (fs.existsSync('./database/db.sqlite')) {
-    fs.unlinkSync('./database/db.sqlite')
-}
 let db =  new sqlite3.Database('./database/db.sqlite')
 db.serialize()
 
