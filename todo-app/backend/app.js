@@ -6,14 +6,13 @@ const app = express();
 app.use(cors());
 app.use(express.json())
 
-const test = async () => {
+async () => {
     await db.initiateDB()
 }
 
-test()
-
-app.post('/', (req, res) => {
-    db.testsave(req.body.todo).then(() => db.testretrieve()).then(r => res.json(r))
+app.post('/', async (req, res) => {
+    await db.save(req.body.todo)
+    res.status(201).send()
 })
 
 app.get('/', async (req, res) => {

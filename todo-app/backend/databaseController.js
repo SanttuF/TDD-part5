@@ -5,7 +5,6 @@ db.serialize()
 
 const initiateDB = () => {
     return new Promise ((resolve, reject) => {
-        db.run('CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY AUTOINCREMENT,text TEXT);', ) 
         db.run('DROP TABLE IF EXISTS todos;') 
         db.run('CREATE TABLE todos (id INTEGER PRIMARY KEY AUTOINCREMENT,todo TEXT);', () => {resolve()}) 
     })
@@ -24,25 +23,9 @@ const save = (todo) => {
     return new Promise((resolve, reject) => {
         db.run('INSERT INTO todos (todo) VALUES (?)', todo, (e) => {
           if(e) reject(e)
-          resolve()
+          resolve(todo)
         })
       })
 }
 
-const testsave = (todo) => {
-    return new Promise((resolve, reject) => {
-        todo = 'Hello ' + todo + ' from backend'
-        db.run('INSERT INTO test (text) VALUES (?)', todo, function() {resolve(todo)})
-    })
-}
-
-const testretrieve = () => {
-    return new Promise((resolve, reject) => {
-        db.get("SELECT text FROM test WHERE text LIKE 'Hello %'", function(error, row) {
-            if (error) reject(error)
-            resolve(row)
-        })
-    })
-}
-
-module.exports = {initiateDB, testsave, testretrieve, getAll, save}
+module.exports = {initiateDB, getAll, save}

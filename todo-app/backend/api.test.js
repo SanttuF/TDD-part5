@@ -8,8 +8,11 @@ const sqlite3 = require('sqlite3').verbose()
 let db =  new sqlite3.Database('./database/db.sqlite')
 db.serialize()
 
-test('getting all todos', async () => {
+beforeEach(async () => {
   await dbController.initiateDB()
+})
+
+test('getting all todos', async () => {
   const todo = 'Test123'
   const todo2 = 'test2'
   await new Promise((resolve, reject) => {
@@ -30,16 +33,17 @@ test('getting all todos', async () => {
 })
 
 test('post saves given todo', async() => {
-  await dbController.initiateDB()
   const testTodo = 'testTodo'
-  api
+  await api
     .post('/')
     .send({'todo': testTodo})
     .expect(201)
   
   const todos = await new Promise((resolve, reject) => {
-    db.get('SELECT * FROM todos', (e, r) => {if(e) reject(e); resolve(r)})
+    db.all('SELECT * FROM todos', (error, result) => {
+        if(error) reject(error)
+        resolve(result)
+    })
   })
-  console.log(todos)
   expect(todos[0].todo).toBe(testTodo)
 })
