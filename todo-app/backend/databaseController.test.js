@@ -33,10 +33,10 @@ test('database saves given todo', async () => {
   const todo = 'testTodo'
   await dbController.save(todo)
   const r = await new Promise((resolve, reject) => {
-    db.get('SELECT * FROM todos', (e, r) => {
+    db.all('SELECT todo FROM todos', (e, r) => {
       if(e) reject(e)
       resolve(r)
     })
   })
-  expect(r.todo).toBe(todo)
+  expect(r).toContainEqual({todo})
 })

@@ -10,7 +10,8 @@ db.serialize()
 const initiateDB = () => {
     return new Promise ((resolve, reject) => {
         db.run('CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY AUTOINCREMENT,text TEXT);', ) 
-        db.run('CREATE TABLE IF NOT EXISTS todos (id INTEGER PRIMARY KEY AUTOINCREMENT,todo TEXT);', () => {resolve()}) 
+        db.run('DROP TABLE IF EXISTS todos;') 
+        db.run('CREATE TABLE todos (id INTEGER PRIMARY KEY AUTOINCREMENT,todo TEXT);', () => {resolve()}) 
     })
 }
 
@@ -21,6 +22,15 @@ const getAll = () => {
             resolve(result)
         })
     })
+}
+
+const save = (todo) => {
+    return new Promise((resolve, reject) => {
+        db.run('INSERT INTO todos (todo) VALUES (?)', todo, (e) => {
+          if(e) reject(e)
+          resolve()
+        })
+      })
 }
 
 const testsave = (todo) => {
@@ -39,4 +49,4 @@ const testretrieve = () => {
     })
 }
 
-module.exports = {initiateDB, testsave, testretrieve, getAll}
+module.exports = {initiateDB, testsave, testretrieve, getAll, save}
