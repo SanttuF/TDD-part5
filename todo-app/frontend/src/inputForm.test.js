@@ -24,7 +24,7 @@ test('site sends the inputbox data with the function provided to it', async () =
     await act(async () => {
         await fakeUser.type(input, 'test123')
         await fakeUser.click(submit)
-        expect(sendTodo.mock.calls[0][0].text).toBe('test123')
+        expect(sendTodo.mock.calls[0][0].todo).toBe('test123')
     })
 
 })

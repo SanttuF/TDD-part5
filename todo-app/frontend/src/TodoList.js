@@ -2,13 +2,15 @@ const TodoList = ({ todos }) => {
   return (
     <div>
       <h2>Todos</h2>
+      <ul>
       {todos
-        .map((todo) => (
-          <div key={todo.id}>
-            <p>{todo.text}</p> <br />
+        .map((todo, i) => (
+          <div key={i}>
+            <li>{todo.todo}</li>
           </div>
         ))
       }
+      </ul>
     </div>
   )
 }

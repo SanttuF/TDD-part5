@@ -7,8 +7,8 @@ const InputForm = ({ sendTodo, todos, setTodos }) => {
 
   const addTodo = (event) => {
     event.preventDefault()
-    sendTodo({text})
-    setTodos(todos.concat([text]))
+    sendTodo({'todo': text})
+    setTodos(todos.concat([{'todo': text}]))
     setText('')
   }
 

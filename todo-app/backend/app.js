@@ -6,9 +6,10 @@ const app = express();
 app.use(cors());
 app.use(express.json())
 
-async () => {
+const initiateDB = async () => {
     await db.initiateDB()
 }
+initiateDB()
 
 app.post('/', async (req, res) => {
     await db.save(req.body.todo)
