@@ -28,3 +28,15 @@ test('database returns all todos when asked', async () => {
   expect(r[0].todo).toBe(todo)
   expect(r[1].todo).toBe(todo2)
 })
+
+test('database saves given todo', async () => {
+  const todo = 'testTodo'
+  await dbController.save(todo)
+  const r = await new Promise((resolve, reject) => {
+    db.get('SELECT * FROM todos', (e, r) => {
+      if(e) reject(e)
+      resolve(r)
+    })
+  })
+  expect(r.todo).toBe(todo)
+})
